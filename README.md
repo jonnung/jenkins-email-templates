@@ -1,5 +1,5 @@
 # Jenkins email groovy template
 
-!(./screen_shot.png)
+![](./screen_shot.png)
 
 
