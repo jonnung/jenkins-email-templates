@@ -12,14 +12,14 @@ h5{font-size:18px;color:#444!important;font-family:Arial,Helvetica,sans-serif}
 p{font-size:12px;color:#444!important;font-family:"Lucida Grande","Lucida Sans","Lucida Sans Unicode",sans-serif;line-height:1.5}
 ol li img{display:inline;height:20px}
 .console {
-	font-family:Courier New;
-	table-layout:fixed;
-	border-collapse: collapse;
-	width:706px;
+  font-family:Courier New;
+  table-layout:fixed;
+  border-collapse: collapse;
+  width:706px;
 }
 .console td {
-	overflow:auto;
-	white-space:nowrap;
+  overflow:auto;
+  white-space:nowrap;
 }
 td.test_failed { color:red; }
 
@@ -27,66 +27,72 @@ td.test_failed { color:red; }
 .news{text-align:center;padding-top:15px;}
 .content{width:720px;margin:0 auto;background-color:white}
 .round_border{margin-bottom:5px;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;margin-top:0;padding:6px;border:1px solid #ccc}
-.status{background-color:<%= 
-            build.result.toString() == "SUCCESS" ? 'green' : 'red' %>;font-size:28px;font-weight:bold;color:white;width:720px;height:52px;margin-bottom:18px;text-align:center;vertical-align:middle;border-collapse:collapse;background-repeat:no-repeat}
+.status{background-color:<%= build.result.toString() == "SUCCESS" ? 'green' : 'red' %>;font-size:28px;font-weight:bold;color:white;width:720px;height:52px;margin-bottom:18px;text-align:center;vertical-align:middle;border-collapse:collapse;background-repeat:no-repeat}
 .status .info{color:white!important;text-shadow:0 -1px 0 rgba(0,0,0,0.3);font-size:32px;line-height:36px;padding:8px 0}
 .main img{width:38px;margin-right:16px;height:38px}
 .main table th{text-align:right;}
 .coverage table th{text-align:right;}
 </style>
-<body>
-<div class="content round_border">
-		<div class="status">
-			<p class="info"><%= build.result.toString() %></p>
-		</div>
-		<!-- status -->
-		<div class="main round_border">
-			<table>
-				<tbody>
-					<tr>
-						<th>Project:</th>
-						<td>${project.name}</td>
-					</tr>
-					<tr>
-						<th>Build ${build.displayName}:</th>
-						<td><a
-							href="${rooturl}${build.url}">${rooturl}${build.url}</a></td>
-					</tr>
-					<tr>
-						<th>Date of build:</th>
-						<td>${it.timestampString}</td>
-					</tr>
-					<tr>
-						<th>Build duration:</th>
-						<td>${build.durationString}</td>
-					</tr>
-					<tr>
-						<th>Changes</th>
-						<td><a
-							href="${rooturl}${build.url}changes">${rooturl}${build.url}changes</a></td>
-					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
-				</tbody>
+<body style="background-color: #e4e4e4;margin: 0;padding: 0;">
+<div class="content round_border" style="width: 720px;margin: 0 auto;background-color: white;margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+    <div class="status" style="background-color: <%= build.result.toString() == "SUCCESS" ? 'green' : 'black' %>;font-size:50px;font-weight:bold;color:white;width:720px;min-height:180px;margin-bottom:18px;text-align:center;vertical-align:middle;border-collapse:collapse;background-repeat:no-repeat">
+     <table>
+       <tr>
+         <td style="width: 50px;"></td>
+         <td background=<%= build.result.toString() == "SUCCESS" ? 'https://wiki.jenkins-ci.org/download/attachments/2916393/jenkins-thpr.svg' : 'https://wiki.jenkins-ci.org/download/attachments/2916393/fire-jenkins.svg' %> style="width:150px; height: 150px;">
+         </td>
+         <td style="width: 500px; margin: 0;padding: 65px 0; text-align: center; font-size: 50px;font-family: 'Lucida Grande','Lucida Sans','Lucida Sans Unicode',sans-serif;line-height: 36px;text-shadow: 0 -1px 0 rgba(0,0,0,0.3);color: white!important;">
+         <%= build.result.toString() %>
+         </td>
+       </tr>
+     </table>
+    </div>
+    <!-- status -->
+    <div class="main round_border" style="margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+      <table>
+        <tbody>
+          <tr>
+            <th style="text-align: right;">Project:</th>
+            <td>${project.name}</td>
+          </tr>
+          <tr>
+            <th style="text-align: right;">Build ${build.displayName}:</th>
+            <td><a href="${rooturl}${build.url}" style="color: #4a72af;">${rooturl}${build.url}</a></td>
+          </tr>
+          <tr>
+            <th style="text-align: right;">Date of build:</th>
+            <td>${it.timestampString}</td>
+          </tr>
+          <tr>
+            <th style="text-align: right;">Build duration:</th>
+            <td>${build.durationString}</td>
+          </tr>
+          <tr>
+            <th style="text-align: right;">Changes</th>
+            <td><a href="${rooturl}${build.url}changes" style="color: #4a72af;">${rooturl}${build.url}changes</a></td>
+          </tr>
+          <tr>
+            <td colspan="2">&nbsp;</td>
+          </tr>
+        </tbody>
 
-			</table>
-			
-		</div>
-		<!-- main -->
+      </table>
+      
+    </div>
+    <!-- main -->
         <% def artifacts = build.artifacts
             if(artifacts != null && artifacts.size() > 0) { %>
         
-		<div class="artifacts round_border">
-			<b>Screenshots:</b>
-			<ul>
-            <% 		artifacts.each() { f -> %>		
-				<%    if (f.toString().contains('screenshots/')) { %>
-                <li><a href="${rooturl}${build.url}artifact/${f}">${f}</a></li>
-	            <%	  } %>                
-            <%		} %>                
-			</ul>
-		</div>
+    <div class="artifacts round_border" style="margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+      <b>Screenshots:</b>
+      <ul>
+            <%     artifacts.each() { f -> %>    
+        <%    if (f.toString().contains('screenshots/')) { %>
+                <li><a href="${rooturl}${build.url}artifact/${f}" style="color: #4a72af;">${f}</a></li>
+              <%    } %>                
+            <%    } %>                
+      </ul>
+    </div>
         <% } %>
 
         <% def changeSet = build.changeSet
@@ -94,74 +100,73 @@ td.test_failed { color:red; }
             def hadChanges = false
             def count = 0 %>
             
-		<div class="details round_border">
-			<b>Changes in detail:</b>
-			<ol>
-            <% 	changeSet.each() { cs ->
+    <div class="details round_border" style="margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+      <b>Changes in detail:</b>
+      <ol>
+            <%   changeSet.each() { cs ->
                     hadChanges = true
                     def aUser = cs.author %>
-				<li>${cs.msgAnnotated} (${aUser.displayName})
-                    (<a href="${rooturl}${build.url}changes#detail${count}">detail</a>)</li>
+        <li>${cs.msgAnnotated} (${aUser.displayName})
+                    (<a href="${rooturl}${build.url}changes#detail${count}" style="color: #4a72af;">detail</a>)</li>
             <%      count ++
                 }  %>
-			</ol>
-			<% if (! hadChanges) { %>
-				<p>No changes</p>
-			<% } %>
-		</div>
+      </ol>
+      <% if (! hadChanges) { %>
+        <p style="margin: 0;padding: 0;font-size: 12px;font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode",sans-serif;line-height: 1.5;color: #444!important;">No changes</p>
+      <% } %>
+    </div>
         <% } %>
 
-		<!-- details -->
-		<% def junitResultList = it.JUnitTestResult
-		if (junitResultList.isEmpty() != true) {
-		%>
-		<div class="test_results round_border">
-			<b>Test results:</b>
-			
-		    <table>
-				<% junitResultList.each() { jr ->
-					 jr.getChildren().each() { pr -> %>
-						 <tr><td>${pr.getName()} - passed: ${pr.getPassCount()}, failed: ${pr.getFailCount()}, skipped: ${pr.getSkipCount()}, total: ${pr.getPassCount() + pr.getFailCount() + pr.getSkipCount()}</td></tr>
-					     <% pr.getFailedTests().each() { t -> %>
-							 <tr><td class="test_failed"><b><li>Failed: ${t.getFullName()}</li></b></td></tr>
- 		        <%          }
-			         }
-			       } %>
-			</table>
-		</div>
+    <!-- details -->
+    <% def junitResultList = it.JUnitTestResult
+    if (junitResultList.isEmpty() != true) {
+    %>
+    <div class="test_results round_border" style="margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+      <b>Test results:</b>
+      
+        <table>
+        <% junitResultList.each() { jr ->
+           jr.getChildren().each() { pr -> %>
+             <tr><td>${pr.getName()} - passed: ${pr.getPassCount()}, failed: ${pr.getFailCount()}, skipped: ${pr.getSkipCount()}, total: ${pr.getPassCount() + pr.getFailCount() + pr.getSkipCount()}</td></tr>
+               <% pr.getFailedTests().each() { t -> %>
+               <tr><td class="test_failed" style="color: red;"><b><li>Failed: ${t.getFullName()}</li></b></td></tr>
+             <%          }
+               }
+             } %>
+      </table>
+    </div>
         <% } %>
 
-		<!-- coverage -->
-		<% if (it.coberturaAction != null) { %>
-			<% if (it.coberturaAction.result != null) { %>
-				<% def cr = it.coberturaAction.result %>
-				<div class="coverage round_border">
-					<b>Coverage report:</b>
-					<table>
-						<% cr.metrics.each { m -> %>
-							<tr>
-								<th>${m.name}:</th>
-								<td>${cr.getCoverage(m).percentage}% (${cr.getCoverage(m)})</td>
-							</tr>
-						<% } %>
-					</table>
-				<a href="${rooturl}${build.url}cobertura/_default_">file level detail</a>			
-				</div>
-	        <% } %>
+    <!-- coverage -->
+    <% if (it.coberturaAction != null) { %>
+      <% if (it.coberturaAction.result != null) { %>
+        <% def cr = it.coberturaAction.result %>
+        <div class="coverage round_border" style="margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+          <b>Coverage report:</b>
+          <table>
+            <% cr.metrics.each { m -> %>
+              <tr>
+                <th style="text-align: right;">${m.name}:</th>
+                <td>${cr.getCoverage(m).percentage}% (${cr.getCoverage(m)})</td>
+              </tr>
+            <% } %>
+          </table>
+        <a href="${rooturl}${build.url}cobertura/_default_" style="color: #4a72af;">file level detail</a>      
+        </div>
+          <% } %>
         <% } %>
-		
-		<!-- CONSOLE OUTPUT -->
-		<% if(build.result==hudson.model.Result.FAILURE) { %>
-		<div class="console round_border">
-			<table class="console">
-			<tr><td><b>Console output:</b></td></tr>
-				<tr><td class="console"><pre>${build.getLog(100).toArray().join('\n')}</pre></td></tr>
-			</table>
-		</div>
-		<% } %>
-
+    
+    <!-- CONSOLE OUTPUT -->
+    <% if(build.result==hudson.model.Result.FAILURE) { %>
+    <div class="console round_border" style="font-family: Courier New;table-layout: fixed;border-collapse: collapse;width: 706px;margin-bottom: 5px;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;margin-top: 0;padding: 6px;border: 1px solid #ccc;">
+      <table class="console" style="font-family: Courier New;table-layout: fixed;border-collapse: collapse;width: 706px;">
+      <tr><td style="overflow: auto;white-space: nowrap;"><b>Console output:</b></td></tr>
+        <tr><td class="console" style="font-family: Courier New;table-layout: fixed;border-collapse: collapse;width: 706px;overflow: auto;white-space: nowrap;"><pre>${build.getLog(100).toArray().join('\n')}</pre></td></tr>
+      </table>
+    </div>
+    <% } %>
 
     </div>
-	<!-- content -->
+  <!-- content -->
 
 </body>
